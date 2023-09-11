@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depl-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      name: auth-pod
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: zhangshihao/auth
+          env:
+            - name: MONGO_URI
+              value: "mongodb://auth-mongo-srv:27017/auth"
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: oss-secret
+                  key: accessKeyId
+            - name: ACCESS_KEY_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oss-secret
+                  key: accessKeySecret
+            - name: IMAGE_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: oss-secret
+                  key: imageBucket
+            - name: REGION
+              valueFrom:
+                secretKeyRef:
+                  name: oss-secret
+                  key: region
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

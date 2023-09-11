@@ -1,0 +1,22 @@
+{
+  "name": "bookproject",
+  "version": "1.0.0",
+  "description": "common global node module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/body-parser": "^1.19.2",
+    "@zsh-common/online-library-common": "^1.0.3",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^7.5.0",
+    "tsx": "^3.12.8",
+    "typescript": "^5.2.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

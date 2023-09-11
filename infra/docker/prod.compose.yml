@@ -1,0 +1,15 @@
+services:
+    auth:
+      build:
+        context: ./apps/auth
+        dockerfile: Dockerfile
+      environment:
+        NODE_ENV: production
+      restart: always
+        
+    nginx:
+      build:
+        context: ../nginx
+      ports:
+        - 80:80
+      restart: always
