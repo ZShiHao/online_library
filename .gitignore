@@ -1,4 +1,4 @@
 online-library-common
 node_modules
 infra/docker/secrets
-
+.vscode

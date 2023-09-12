@@ -6,6 +6,10 @@ services:
       environment:
         NODE_ENV: production
       restart: always
+      secrets:
+        - MONGO_URI
+        - JWT_KEY
+        - Access_Key_Secret
         
     nginx:
       build:
@@ -13,3 +17,11 @@ services:
       ports:
         - 80:80
       restart: always
+
+secrets:
+  MONGO_URI:
+    file: ./secrets/.MONGO_URI.txt
+  JWT_KEY:
+    file: ./secrets/.JWT_KEY.txt
+  Access_Key_Secret:
+    file: ./secrets/.Access_Key_Secret.txt
