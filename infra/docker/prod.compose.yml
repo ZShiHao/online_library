@@ -12,10 +12,11 @@ services:
         - Access_Key_Secret
         
     nginx:
-      build:
-        context: ../nginx
+      image: nginx:1.25-alpine-slim
       ports:
         - 80:80
+      volumes:
+        - ../nginx/nginx.conf:/etc/nginx/nginx.conf
       restart: always
 
 secrets:
