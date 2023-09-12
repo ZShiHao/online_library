@@ -24,19 +24,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/jsonwebtoken": "^9.0.2",
-    "@types/cookie-session": "^2.0.45",
-
-    "cookie-session": "^2.0.0",
-    "jsonwebtoken": "^9.0.2",
-
-    "@types/express": "^4.17.17",
+    "@types/ali-oss": "^6.16.8",
     "@types/body-parser": "^1.19.2",
+    "@types/cookie-session": "^2.0.45",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
     "@zsh-common/online-library-common": "^1.0.3",
+    "ali-oss": "^6.18.1",
     "body-parser": "^1.20.2",
+    "cookie-session": "^2.0.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.0",
     "tsx": "^3.12.8",
     "typescript": "^5.2.2"

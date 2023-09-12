@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password.ts";
+import store from "../services/oss.ts";
 interface UserAttrs {
   email: string;
   password: string;
-  username?: string;
-  avatar?: string;
+  username: string;
+  avatar: string;
 }
 
 interface UserDoc extends mongoose.Document, UserAttrs {}
@@ -23,19 +24,20 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // username: {
-    //   type: String,
-    //   require: true,
-    // },
-    // avatar: {
-    //   type: String,
-    //   required: true,
-    // },
+    username: {
+      type: String,
+      require: true,
+    },
+    avatar: {
+      type: String,
+      required: true,
+    },
   },
   {
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
+        ret.avatar=store.signatureUrl(ret.avatar,{expires:process.env.EXPIRES?Number(process.env.EXPIRES):undefined})
         delete ret._id;
         delete ret.password;
         delete ret.__v;

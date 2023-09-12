@@ -9,6 +9,14 @@ import {
 
 const router = elxpress.Router();
 
+function setDefaultUsername(req:Request,res:Response,next:NextFunction){
+  if(!req.body.username){
+    req.body.username = req.body.email.split("@")[0];
+  }
+  req.body.avatar='avatar/default-avatar.jpg'
+  next();
+}
+
 router.post(
   "/api/users/signup",
   [
@@ -19,8 +27,9 @@ router.post(
       .withMessage("Password must be between 4 and 20 characters"),
   ],
   validateRequest,
+  setDefaultUsername,
   async (req: Request, res: Response, next: NextFunction) => {
-    const { email, password } = req.body;
+    const { email, password,username,avatar } = req.body;
     const existingUser = await User.findOne({ email });
     try {
       //expressbug无法捕获错误,所以手动try catch捕获错误
@@ -30,7 +39,7 @@ router.post(
     } catch (error) {
       return next(error);
     }
-    const user = User.build({ email, password });
+    const user = User.build({ email, password,username,avatar });
     await user.save();
     const userJwt = jwt.sign(
       {

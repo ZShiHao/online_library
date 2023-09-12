@@ -7,6 +7,9 @@ import { signoutRouter } from "./routes/signout.ts";
 import { signupRouter } from "./routes/signup.ts";
 import { NotFoundError, errorHandler } from "@zsh-common/online-library-common";
 
+
+
+
 const app = express();
 app.set("trust proxy", true);
 app.use(bodyParser.json());
@@ -22,7 +25,6 @@ app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 app.all("*", (req) => {
-  console.log(req.path);
   throw new NotFoundError();
 });
 app.use(errorHandler);

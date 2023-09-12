@@ -7,23 +7,30 @@ services:
         - 3000:3000
       volumes:
         - ../../apps/auth:/app
+      environment:
+        NODE_ENV: development
+        EXPIRES: 3600
+
       secrets:
         - MONGO_URI
         - JWT_KEY
-        - Access_Key_Secret
+        - OSS_ACCESS_KEY_SECRET
+        - OSS_ACCESS_KEY_ID
 
-    nginx:
-      image: nginx:1.25-alpine-slim
-      ports:
-        - 80:80
-      volumes:
-        - ../nginx/nginx.conf:/etc/nginx/nginx.conf
+    # nginx:
+    #   image: nginx:1.25-alpine-slim
+    #   ports:
+    #     - 80:80
+    #   volumes:
+    #     - ../nginx/nginx.conf:/etc/nginx/nginx.conf
 
 secrets:
   MONGO_URI:
     file: ./secrets/.MONGO_URI.txt
   JWT_KEY:
     file: ./secrets/.JWT_KEY.txt
-  Access_Key_Secret:
-    file: ./secrets/.Access_Key_Secret.txt
+  OSS_ACCESS_KEY_SECRET:
+    file: ./secrets/.OSS_ACCESS_KEY_SECRET.txt
+  OSS_ACCESS_KEY_ID:
+    file: ./secrets/.OSS_ACCESS_KEY_ID.txt
   
