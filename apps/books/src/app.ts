@@ -8,7 +8,9 @@ import {
   currentUser,
   requireAuth,
 } from "@zsh-common/online-library-common";
-import { createBookRouter } from "./routes/new.ts";
+import { createBookRouter } from "./routes/books.ts";
+import { createUploadRouter } from "./routes/upload.ts";
+
 
 const app = express();
 app.set("trust proxy", true);
@@ -20,8 +22,11 @@ app.use(
   })
 );
 app.use(currentUser);
+app.use(createUploadRouter);
 
 app.use(createBookRouter);
+
+
 
 app.all("*", () => {
   throw new NotFoundError();

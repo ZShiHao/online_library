@@ -1,11 +1,14 @@
-FROM node:19.2.0-alpine
+FROM base
 
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 COPY package.json .
-RUN npm install -g pnpm
 RUN pnpm install --prod
 
 COPY . .
+
+EXPOSE 3000
 
 CMD ["pnpm", "start"]

@@ -17,6 +17,23 @@ services:
         - OSS_ACCESS_KEY_SECRET
         - OSS_ACCESS_KEY_ID
 
+    books:
+      build:
+        context: ../../apps/books
+        dockerfile: dev.Dockerfile
+      ports:
+        - 3000:3000
+      volumes:
+        - ../../apps/books/src:/app/src
+      environment:
+        NODE_ENV: development
+        EXPIRES: 3600
+      secrets:
+        - MONGO_URI
+        - JWT_KEY
+        - OSS_ACCESS_KEY_SECRET
+        - OSS_ACCESS_KEY_ID
+
     # nginx:
     #   image: nginx:1.25-alpine-slim
     #   ports:
