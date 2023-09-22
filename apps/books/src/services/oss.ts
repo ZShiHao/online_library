@@ -26,7 +26,7 @@ const store=new OSS({
     region:'oss-cn-hangzhou',
     accessKeyId:process.env.OSS_ACCESS_KEY_ID!,
     accessKeySecret:process.env.OSS_ACCESS_KEY_SECRET!,
-    bucket: 'library-image'
+    bucket: 'online-library'
 })
 
 

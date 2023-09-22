@@ -3,8 +3,8 @@ services:
       build:
         context: ../../apps/auth
         dockerfile: dev.Dockerfile
-      ports:
-        - 3000:3000
+      # ports:
+      #   - 3000:3000
       volumes:
         - ../../apps/auth:/app
       environment:
@@ -21,8 +21,8 @@ services:
       build:
         context: ../../apps/books
         dockerfile: dev.Dockerfile
-      ports:
-        - 3000:3000
+      # ports:
+      #   - 3000:3000
       volumes:
         - ../../apps/books/src:/app/src
       environment:
@@ -34,12 +34,12 @@ services:
         - OSS_ACCESS_KEY_SECRET
         - OSS_ACCESS_KEY_ID
 
-    # nginx:
-    #   image: nginx:1.25-alpine-slim
-    #   ports:
-    #     - 80:80
-    #   volumes:
-    #     - ../nginx/nginx.conf:/etc/nginx/nginx.conf
+    nginx:
+      image: nginx:1.25-alpine-slim
+      ports:
+        - 80:80
+      volumes:
+        - ../nginx/nginx.conf:/etc/nginx/nginx.conf
 
 secrets:
   MONGO_URI:

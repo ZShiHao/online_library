@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
+import cors from 'cors'
 
 import {
   NotFoundError,
@@ -14,6 +15,8 @@ import { createUploadRouter } from "./routes/upload.ts";
 
 const app = express();
 app.set("trust proxy", true);
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(
   cookieSession({

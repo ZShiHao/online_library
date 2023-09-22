@@ -91,6 +91,10 @@ bookSchema.pre("save", async function () {
   this.set("updateDate", dayjs().format("YYYY-MM-DD HH:mm:ss"));
 });
 
+bookSchema.pre("updateOne", async function () {
+  this.set("updateDate", dayjs().format("YYYY-MM-DD HH:mm:ss"));
+});
+
 bookSchema.statics.build = (attrs: BookAttrs) => {
   return new Book(attrs);
 };

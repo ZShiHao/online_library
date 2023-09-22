@@ -6,6 +6,7 @@ import {
   BadRequestError,
   validateRequest,
 } from "@zsh-common/online-library-common";
+import cors from "cors";
 
 const router = elxpress.Router();
 
@@ -17,14 +18,18 @@ function setDefaultUsername(req:Request,res:Response,next:NextFunction){
   next();
 }
 
+// router.options("/api/users/signup",cors(),(req,res,next)=>{
+//   console.log('options')
+// })
+
 router.post(
   "/api/users/signup",
   [
     body("email").isEmail().withMessage("Email must be valid"),
-    body("password")
-      .trim()
-      .isLength({ min: 4, max: 20 })
-      .withMessage("Password must be between 4 and 20 characters"),
+    // body("password")
+    //   .trim()
+    //   .isLength({ min: 4, max: 20 })
+    //   .withMessage("Password must be between 4 and 20 characters"),
   ],
   validateRequest,
   setDefaultUsername,
@@ -39,8 +44,10 @@ router.post(
     } catch (error) {
       return next(error);
     }
+
     const user = User.build({ email, password,username,avatar });
     await user.save();
+
     const userJwt = jwt.sign(
       {
         id: user.id,
@@ -51,7 +58,8 @@ router.post(
     req.session = {
       jwt: userJwt,
     }; //转换为base64格式
-    res.status(201).send(user);
+
+    res.status(200).send({status:201,message:'Signup success.',data:user});
   }
 );
 
