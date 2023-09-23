@@ -5,13 +5,13 @@ import cors from 'cors'
 
 import {
   NotFoundError,
-  errorHandler,
   currentUser,
   requireAuth,
 } from "@zsh-common/online-library-common";
+import {errorHandler} from "./middlewares/error_handler.ts"
 import { createBookRouter } from "./routes/books.ts";
 import { createUploadRouter } from "./routes/upload.ts";
-
+import {createDownloadRouter} from "./routes/download.ts"
 
 const app = express();
 app.set("trust proxy", true);
@@ -26,7 +26,7 @@ app.use(
 );
 app.use(currentUser);
 app.use(createUploadRouter);
-
+app.use(createDownloadRouter);
 app.use(createBookRouter);
 
 

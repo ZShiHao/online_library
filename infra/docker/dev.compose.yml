@@ -10,7 +10,6 @@ services:
       environment:
         NODE_ENV: development
         EXPIRES: 3600
-
       secrets:
         - MONGO_URI
         - JWT_KEY
@@ -33,6 +32,19 @@ services:
         - JWT_KEY
         - OSS_ACCESS_KEY_SECRET
         - OSS_ACCESS_KEY_ID
+    
+    tags:
+      build:
+        context: ../../apps/tags
+        dockerfile: dev.Dockerfile
+      # ports:
+      #   - 3000:3000
+      volumes:
+        - ../../apps/tags/src:/app/src
+      environment:
+        NODE_ENV: development
+      secrets:
+        - MONGO_URI
 
     nginx:
       image: nginx:1.25-alpine-slim

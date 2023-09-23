@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { Book } from "../models/books_model.ts";
 import { Query, PaginateOptions } from "mongoose";
-import store from "../services/oss.ts";
 
 const router = express.Router();
 
@@ -30,7 +29,7 @@ router.get("/api/books", async (req: Request, res: Response) => {
   console.log(findRes);
 
   const body = {
-    docs: findRes.docs,
+    data: findRes.docs,
     total: findRes.totalDocs,
     totalPages: findRes.totalPages,
     page: findRes.page,

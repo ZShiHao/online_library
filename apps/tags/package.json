@@ -1,0 +1,48 @@
+{
+  "name": "books",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --exec  tsx src/index.ts",
+    "start": "tsx src/index.ts",
+    "typecheck": "nodemon --exec tsc --noEmit",
+    "test": "jest --watchAll --no-cache"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.17",
+    "@zsh-common/online-library-common": "^1.0.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.9",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^7.5.0",
+    "mongoose-paginate-v2": "^1.7.4",
+    "tsx": "^3.12.8",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.4",
+    "@types/supertest": "^2.0.12",
+    "jest": "^29.6.4",
+    "mongodb-memory-server": "^8.15.1",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1"
+  }
+}
