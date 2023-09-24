@@ -16,6 +16,7 @@ router.get("/api/books", async (req: Request, res: Response) => {
   const paginationOptions: PaginateOptions = {
     page: Number(req.query.current),
     limit: Number(req.query.pageSize),
+    select:'-source'
   };
 
   if (req.query.sort) {
@@ -39,11 +40,22 @@ router.get("/api/books", async (req: Request, res: Response) => {
   res.status(200).send(body);
 });
 
-router.get("/api/books/:id", (req: Request, res: Response) => {
-  console.log(req.params);
-
-  res.status(200).send({});
-});
+router.get(
+  "/api/books/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.params);
+    try {
+      const book = await Book.findOne({ _id: req.params.id });
+      res.status(200).send({
+        status: 200,
+        data: book,
+        message: "Success",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 router.post("/api/books", async (req: Request, res: Response) => {
   try {
