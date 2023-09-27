@@ -39,7 +39,6 @@ router.get("/api/books", async (req: Request, res: Response) => {
 
   res.status(200).send(body);
 });
-
 router.get(
   "/api/books/:id",
   async (req: Request, res: Response, next: NextFunction) => {

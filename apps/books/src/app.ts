@@ -12,6 +12,7 @@ import {errorHandler} from "./middlewares/error_handler.ts"
 import { createBookRouter } from "./routes/books.ts";
 import { createUploadRouter } from "./routes/upload.ts";
 import {createDownloadRouter} from "./routes/download.ts"
+import {createCaptchaRouter} from "./routes/captcha.ts"
 
 const app = express();
 app.set("trust proxy", true);
@@ -24,9 +25,10 @@ app.use(
     secure: false, //当是https请求时才能使用set-cookie
   })
 );
-app.use(currentUser);
+// app.use(currentUser);
 app.use(createUploadRouter);
 app.use(createDownloadRouter);
+app.use(createCaptchaRouter);
 app.use(createBookRouter);
 
 
